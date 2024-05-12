@@ -7,6 +7,8 @@ public class ExampleGameObject extends GameObject{
     }
 
     public void update() {
+        // Move the object to the right
+        setX(getX() + 1);
     }
 
 }

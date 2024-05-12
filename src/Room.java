@@ -21,6 +21,19 @@ public class Room extends JPanel {
         this.width = width;
         this.height = height;
         this.backgroundColor = backgroundColor;
+
+        // make this repaint itself 60 times a second
+        new Thread(() -> {
+            while (true) {
+                repaint();
+                
+                try {
+                    Thread.sleep(1000 / 60);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }).start();
     }
 
     /**
@@ -71,7 +84,8 @@ public class Room extends JPanel {
         g.setColor(backgroundColor);
         g.fillRect(0, 0, width, height);
 
-
+        // Draw the game instances in the room
+        drawGameInstances(g, gameInstances);
     }
 
 

@@ -57,19 +57,8 @@ public abstract class GameObject {
      * Render the object. Rendering code goes here. i.e. drawing the object on the screen
      */
     public void render(Graphics g) {
-        if (visible) {
-            if (image != null) {
-                // Draw the image
-                //g.drawImage(x, y, width, height);
-            } else {
-                // Draw the rectangle
-                Color oldColor = g.getColor();
-                g.setColor(color);
-                g.fillRect(x, y, width, height);
-                g.setColor(oldColor);
-            }
-        }
-    
+        g.setColor(color);
+        g.fillRect(x, y, width, height);    
     }
 
     // Methods related to the object's position -------------------------------------------------------------------------------------------------------------
