@@ -1,4 +1,5 @@
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Image;
 import java.awt.Point;
 import java.awt.Graphics;
@@ -34,6 +35,16 @@ public abstract class GameObject {
         this.height = height;
     }
 
+    public GameObject(int x, int y, int width, int height, Color color) {
+        this(x, y, width, height);
+        this.color = color;
+    };
+
+    public GameObject(int x, int y, Image image) {
+        this(x, y,image.getWidth(null), image.getHeight(null));
+        this.image = image;
+    };
+
 
     /**
      * To be called every 'step' of the game loop, i.e. every frame
@@ -49,15 +60,19 @@ public abstract class GameObject {
         if (visible) {
             if (image != null) {
                 // Draw the image
-                g.draw(x, y, width, height);
+                //g.drawImage(x, y, width, height);
             } else {
                 // Draw the rectangle
-                g.fillRectangle(x, y, width, height);
+                Color oldColor = g.getColor();
+                g.setColor(color);
+                g.fillRect(x, y, width, height);
+                g.setColor(oldColor);
             }
         }
     
     }
 
+    // Methods related to the object's position -------------------------------------------------------------------------------------------------------------
     /**
      * Get the x-coordinate of the top-left corner of the object 
      * @return x-coordinate of the top-left corner of the object
@@ -83,6 +98,42 @@ public abstract class GameObject {
     }
 
     /**
+     * Set the position of the object 
+     * @param x x-coordinate of the top-left corner of the object
+     * @param y y-coordinate of the top-left corner of the object
+     */
+    public void setPosition(int x, int y) {
+        this.x = x;
+        this.y = y;
+    }
+
+    /**
+     * Set the position of the object 
+     * @param position position of the object
+     */
+    public void setPosition(Point position) {
+        this.x = position.x;
+        this.y = position.y;
+    }
+
+    /**
+     * Get the color of the object
+     * @param x x-coordinate of the top-left corner of the object
+     */
+    public void setX(int x) {
+        this.x = x;
+    }
+
+    /**
+     * Get the y-coordinate of the top-left corner of the object 
+     * @param y y-coordinate of the top-left corner of the object
+     */
+    public void setY(int y) {
+        this.y = y;
+    }
+
+    // Methods related to the object's size -------------------------------------------------------------------------------------------------------------
+    /**
      * Get the width of the object 
      * @return width of the object
      */
@@ -98,6 +149,56 @@ public abstract class GameObject {
         return height;
     }
 
+    /**
+     * Get the size of the object 
+     * @return size of the object
+     */
+    public void setWidth(int width) {
+        this.width = width;
+    }
+
+    /**
+     * Get the size of the object 
+     * @return size of the object
+     */
+    public void setHeight(int height) {
+        this.height = height;
+    }
+
+    /**
+     * Get the size of the object
+     * @return size of the object
+     */
+    public Dimension getSize() {
+        return new Dimension(width, height);
+    }
+
+    /**
+     * Set the x-scale of the object
+     * @param xScale 
+     */
+    public void setXScale(float xScale) {
+        this.xScale = xScale;
+    }
+
+    /**
+     * Set the y-scale of the object
+     * @param yScale
+     */
+    public void setYScale(float yScale) {
+        this.yScale = yScale;
+    }
+
+
+    /**
+     * Set the scale of the object
+     * @param xScale x-scale of the object
+     * @param yScale y-scale of the object
+     */
+    public void setScale(float xScale, float yScale) {
+        this.setXScale(xScale);
+        this.setYScale(yScale);
+    }
 
     /**
      * Get the activity of the object 
